@@ -17,7 +17,7 @@ jobs:
     
     outputs:
       bucket_nombre: ${{ steps.capturar_bucket.outputs.bucket_nombre }}
-      instance_public_ip: ${{ steps.capturar_ip_ec2.outputs.instance_public_ip }}
+      #instance_public_ip: ${{ steps.capturar_ip_ec2.outputs.instance_public_ip }}
       
     steps:   
       - name: Checkout  
@@ -52,12 +52,12 @@ jobs:
       - name: Capturar output de Terraform (Bucket)
         id: capturar_bucket
         run: echo "bucket_nombre=$(terraform output -raw s3)" >> "$GITHUB_OUTPUT"
-        working-directory: ./archivosTf
+        working-directory: ./archivos-tf
 
-      - name: Capturar ip de la EC2
-        id: capturar_ip_ec2
-        run: echo "instance_public_ip=$(terraform output -raw instance_public_ip)" >> "$GITHUB_OUTPUT"
-        working-directory: ./archivosTf   
+      #- name: Capturar ip de la EC2
+      #  id: capturar_ip_ec2
+      #  run: echo "instance_public_ip=$(terraform output -raw instance_public_ip)" >> "$GITHUB_OUTPUT"
+      #  working-directory: ./archivos-tf   
 
       #subir archivos al bucket para luego pasarlos a los contenedores
       - name: Subir tfstate al bucket de S3
