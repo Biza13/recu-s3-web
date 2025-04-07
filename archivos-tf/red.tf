@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 #esto es para acceder al id de mi cuenta
-#data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {}
 
 # Crear una VPC.
 resource "aws_vpc" "Desarrollo-web-VPC" {
