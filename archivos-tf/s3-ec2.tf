@@ -1,5 +1,5 @@
 #GRUPO DE SEGURIDAD
-resource "aws_security_group" "security" {
+/* resource "aws_security_group" "security" {
   name = "seguridad"
   description = "Security group para permitir SSH y HTTP/HTTPS"
   vpc_id      = aws_vpc.Desarrollo-web-VPC.id  # Asegúrate de que esto apunte a la VPC correcta
@@ -33,7 +33,7 @@ resource "aws_security_group" "security" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
+} */
 
 #S3
 resource "aws_s3_bucket" "s3"{    
@@ -47,7 +47,7 @@ resource "aws_s3_bucket" "s3"{
 
 #EC2
 #imagen para amazon linux fedora
-data "aws_ami" "amazon_linux" {
+/* data "aws_ami" "amazon_linux" {
   most_recent = true
 
   filter {
@@ -74,5 +74,5 @@ resource "aws_instance" "instancia" {
   tags = {
     Name = "servidor-apache"
   }
-  user_data = file("script-nginxEn-fedora.sh")
-}
+  user_data = file("../scr-ec2.sh")
+} */
