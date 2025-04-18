@@ -49,6 +49,10 @@ jobs:
         run: aws s3 cp terraform.tfstate s3://${{ secrets.AWS_S3_BUCKET }}/ --region us-east-1 
         working-directory: ./archivos-tf
 
+      #ver si se crea la tabla
+      - name: Verificar tablas DynamoDB
+        run: aws dynamodb list-tables --region us-east-1
+
   #segundo job bucket como servidor y subir la pagina al bucket      
   SubirPaginaEstatica: 
     needs: despliegue
