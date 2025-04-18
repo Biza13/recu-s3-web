@@ -1,12 +1,12 @@
 #S3
-resource "aws_s3_bucket" "s3"{    
-  bucket = var.s3  #nombre que le pondremos al bucket
+#resource "aws_s3_bucket" "s3"{    
+#  bucket = var.s3  #nombre que le pondremos al bucket
 
-  tags = {
-    name = "bucket"
-    Enviroment = "Dev"
-  }
-}
+#  tags = {
+#    name = "bucket"
+#    Enviroment = "Dev"
+#  }
+#}
 
 #dynamoDB
 resource "aws_dynamodb_table" "tabla_dynamodb"{
@@ -22,5 +22,16 @@ resource "aws_dynamodb_table" "tabla_dynamodb"{
   tags = {
     Enviroment = "Dev"
     name = "tfstate-bloqueo"
+  }
+}
+
+#backend usando el s3 que creo previamente en actions
+terraform {
+  backend "s3" {
+    bucket         = var.s3
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "tfstate-bloqueo"
+    encrypt        = true
   }
 }
