@@ -24,13 +24,3 @@ resource "aws_dynamodb_table" "tabla_dynamodb"{
     name = "tfstate-bloqueo"
   }
 }
-
-terraform {
-  backend "s3" {
-    bucket = var.s3
-    key = "terraform.tfstate" # Ruta del archivo tfstate en el bucket
-    region = "us-east-1" # Región del bucket
-    dynamodb_table = "tfstate-bloqueo" # Nombre de la tabla DynamoDB
-    encrypt = true # Cifrar el estado
-  }
-}
