@@ -52,10 +52,10 @@ jobs:
               bucket         = "cubo-s3-begona"
               key            = "terraform.tfstate"
               region         = "us-east-1"
-              use_locking = "tfstate-bloqueo"
+              dynamodb_table = "tfstate-bloqueo"
               encrypt        = true
             }
-          }' >> ./archivos-tf/s3-dynamoTable.tf  
+          }' > ./archivos-tf/s3-dynamoTable.tf  
 
       #Inicializar Terraform con el backend y migrar el estado
       - name: Inicializar Terraform con backend
