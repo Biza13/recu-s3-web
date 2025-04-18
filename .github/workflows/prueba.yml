@@ -60,7 +60,7 @@ jobs:
       #Inicializar Terraform con el backend y migrar el estado
       - name: Inicializar Terraform con backend
         run: |
-          echo "yes" | terraform init -migrate-state
+          terraform init -migrate-state -input=false
         working-directory: ./archivos-tf
 
   #segundo job bucket como servidor y subir la pagina al bucket      
