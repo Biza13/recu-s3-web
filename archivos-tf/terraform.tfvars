@@ -1,1 +1,1 @@
-#s3 = "cubo-s3-begona"
+s3 = "cubo-s3-begona"
