@@ -52,7 +52,7 @@ jobs:
               bucket         = "cubo-s3-begona"
               key            = "terraform.tfstate"
               region         = "us-east-1"
-              dynamodb_table = "tfstate-bloqueo"
+              use_locking = "tfstate-bloqueo"
               encrypt        = true
             }
           }' >> ./archivos-tf/s3-dynamoTable.tf  
