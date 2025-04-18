@@ -31,9 +31,7 @@ jobs:
       - name: Crear bucket S3
         run: |
           aws s3api create-bucket \
-            --bucket ${{ secrets.AWS_S3_BUCKET }} \
-            --region us-east-1 \
-            --create-bucket-configuration LocationConstraint=us-east-1    
+            --bucket ${{ secrets.AWS_S3_BUCKET }} 
           
       #este paso es para instalar terraform en la maquina virtual
       - name: Setup Terraform
