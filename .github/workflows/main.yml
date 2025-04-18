@@ -44,14 +44,24 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./archivos-tf
 
-      #subir archivos al bucket para luego pasarlos a los contenedores
-      - name: Subir tfstate al bucket de S3
-        run: aws s3 cp terraform.tfstate s3://${{ secrets.AWS_S3_BUCKET }}/ --region us-east-1 
-        working-directory: ./archivos-tf
+      #agregamos el backend al archivo .tf  
+      - name: Agregar backend al archivo Terraform
+        run: |
+          echo 'terraform {
+            backend "s3" {
+              bucket         = "cubo-s3-begona"
+              key            = "terraform.tfstate"
+              region         = "us-east-1"
+              dynamodb_table = "tfstate-bloqueo"
+              encrypt        = true
+            }
+          }' > ./archivos-tf/s3-dynamoTable.tf  
 
-      #ver si se crea la tabla
-      - name: Verificar tablas DynamoDB
-        run: aws dynamodb list-tables --region us-east-1
+      #Inicializar Terraform con el backend y migrar el estado
+      - name: Inicializar Terraform con backend
+        run: |
+          terraform init -migrate-state -force-copy
+        working-directory: ./archivos-tf
 
   #segundo job bucket como servidor y subir la pagina al bucket      
   SubirPaginaEstatica: 
